@@ -23,3 +23,15 @@ export const editFile = async (req: Request, res: Response) => {
         res.status(500).send({ error }).end();
     }
 }
+export const getBranch = async (req: Request, res: Response) => {
+    try {
+        const { user_id } = req.params
+        const getFileSelection = await FileModule.findOne().where(`user_id`).equals(`${user_id}`)
+        if (getFileSelection?.file)
+            res.json(getFileSelection.file.branchSelection)
+        else
+            throw 'the branch selection have a problom'
+    } catch (error) {
+        res.status(500).send({ error }).end();
+    }
+}
