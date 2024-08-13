@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { getFile } from "../controllers/file";
+import { editFile, getFile } from "../controllers/file";
 
 const router = Router();
-router.get("/",getFile);
+router.get("/", getFile);
+router.post("/", editFile);
 
 export default router;
