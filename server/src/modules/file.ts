@@ -31,4 +31,4 @@ const fileSchema = new Schema({
 })
 
 
-export const fileModule = model("Configuration_files", fileSchema)
+export const FileModule = model("Configuration_files", fileSchema)
