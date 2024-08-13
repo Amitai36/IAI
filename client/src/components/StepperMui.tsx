@@ -1,9 +1,9 @@
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import { useState } from 'react';
+import Stepper from '@mui/material/Stepper';
 import { Button } from '@mui/material';
+import Step from '@mui/material/Step';
+import Box from '@mui/material/Box';
+import { useState } from 'react';
 
 
 interface StepperProps {
