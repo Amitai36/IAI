@@ -14,8 +14,7 @@ interface StepperProps {
 
 function StepperMui(props: StepperProps) {
     const { steps, components } = props
-    // const [activeStep, setActiveStep] = useState(0)
-    const { setStepDecrease, setStepIncrease, step } = useStepper()
+    const { setStepDecrease, step } = useStepper()
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -28,10 +27,7 @@ function StepperMui(props: StepperProps) {
             </Stepper>
             {components[step]}
             {step === steps.length - 1 && <Button>save/edit</Button>}
-            {/* {step < steps.length - 1 &&
-                <Button onClick={() => setStepIncrease()}>next</Button>} */}
-            {step &&
-                <Button onClick={() => setStepDecrease()}>back</Button>}
+            {step > 0 && <Button onClick={() => setStepDecrease()}>back</Button>}
         </Box>
     )
 }

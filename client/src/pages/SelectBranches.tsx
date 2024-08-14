@@ -1,22 +1,53 @@
-import { useState } from "react"
-import { useGetUser } from "../api/file/QueryFile"
-import SelectComponent from "../components/SelectComponent"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { Button } from "@mui/material"
+
+import { useFileCunfiguretion } from "../store/FileConfiguretion"
+import SelectComponent from "../components/SelectComponent"
+import { useGetUser } from "../api/file/QueryFile"
 import { useStepper } from "../store/Stepper"
 
 function SelectBranches() {
+
     const { data, isLoading } = useGetUser({ userId: "vnjkgGHCJHJHIcb" })
-    const [select, setSelect] = useState('')
+    const { file: fileSettings, setFile } = useFileCunfiguretion()
     const { setStepIncrease } = useStepper()
+
+    const {
+        handleSubmit,
+        formState: { errors },
+        control
+    } = useForm<{ branch: string }>({
+        defaultValues: fileSettings.file.branchSelection
+    })
+
+    const onSubmit: SubmitHandler<{ branch: string }> = (event) => {
+        let currentFile = { ...fileSettings }
+        currentFile.file.branchSelection = event
+        setFile(currentFile)
+        setStepIncrease()
+    }
+
     if (isLoading || !data)
         return <h1>loading...</h1>
+
     return (
-        <div>
-            <SelectComponent lable="select branch" value={select}
-                onChange={(e) => setSelect(String(e.target.value))}
-                option={Object.values(data)} />
-            <Button onClick={setStepIncrease}>Next</Button>
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Controller
+                name="branch"
+                control={control}
+                render={({ field }) => (
+                    <SelectComponent
+                        {...field}
+                        defaultValue={Object.values(data)[0]}
+                        autoFocus={!!errors.branch}
+                        formColor={"info"}
+                        lable="Select Branch"
+                        option={Object.values(data)}
+                    />
+                )}
+            />
+            <Button type="submit">Next</Button>
+        </form >
     )
 }
 

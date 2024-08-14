@@ -3,17 +3,18 @@ import { FormControl, InputLabel, MenuItem, Select, SelectProps } from "@mui/mat
 
 interface SelectComponentProps {
     lable: string,
-    option: string[]
+    option: string[],
+    formColor: "error" | "primary" | "secondary" | "info" | "success" | "warning"
 }
 
-function SelectComponent(props: SelectComponentProps & SelectProps) {
-    const { lable, option, ...other } = props
+const SelectComponent = (props: SelectComponentProps & SelectProps) => {
+    const { lable, formColor, option, ...other } = props
 
     return (
-        <FormControl fullWidth>
-            <InputLabel>{lable}</InputLabel>
+        <FormControl color={formColor} fullWidth>
+            <InputLabel >{lable}</InputLabel>
             <Select size="small" label={lable} {...other}>
-                {option.map((item => <MenuItem value={item}>{item}</MenuItem>))}
+                {option.map((item => <MenuItem key={item} value={item}>{item}</MenuItem>))}
             </Select>
         </FormControl>
     )
