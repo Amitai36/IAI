@@ -1,12 +1,39 @@
+import { z } from "zod"
 import { TextField } from "@mui/material"
-import { useState } from "react"
+import { SubmitHandler, useForm } from "react-hook-form"
+
+import { useStepper } from "../store/Stepper"
+import { copyToTargetSchama } from "../modules/formsSchema"
+import { useFileCunfiguretion } from "../store/FileConfiguretion"
+
+type FormSchema = z.infer<typeof copyToTargetSchama>;
 
 function CopyToTarget() {
-    const [copy, setCopy] = useState('')
+
+    const { file: fileSettings, setFile } = useFileCunfiguretion()
+    const { setStepIncrease } = useStepper()
+    const {
+        register,
+        handleSubmit,
+    } = useForm<FormSchema>({
+        defaultValues: {
+            targetDirectory: fileSettings.file.copyToTarget.targetDirectory
+        }
+    })
+
+    const onSubmit: SubmitHandler<FormSchema> = (event) => {
+        let currentFile = { ...fileSettings }
+        currentFile.file.copyToTarget = { targetDirectory: event.targetDirectory }
+        setFile(currentFile)
+        setStepIncrease()
+    }
+
     return (
-        <TextField value={copy}
-            onChange={(e) => setCopy(e.target.value)}
-            label={"copy to target"} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <TextField fullWidth
+                {...register("targetDirectory")}
+                label={"copy to target"} />
+        </form>
     )
 }
 

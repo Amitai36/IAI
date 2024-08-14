@@ -1,26 +1,35 @@
+export interface ConfigurationManagerProps {
+    url: string,
+    user_name: string,
+    password: string
+}
+
+export interface BuildProps {
+    versionNumber: string,
+    command: string,
+    outputDirectory: string
+}
+
+export interface CopyToTargetProps {
+    targetDirectory: string
+}
+
+export interface VddProps {
+    versionNumber: string,
+    releaseDate: Date,
+    recentFixes: string[]
+}
+
 export interface File {
     _id: string,
     user_id: string,
     version: string,
     file: {
-        configurationManager: {
-            url: string,
-            user_name: string,
-            password: string
-        },
+        configurationManager: ConfigurationManagerProps,
         branchSelection: {},
-        build: {
-            versionNumber: string,
-            command: string,
-            outputDirectory: string
-        },
-        copyToTarget: {
-            targetDirectory: string
-        },
-        vdd: {
-            versionNumber: string,
-            releaseDate: Date,
-            recentFixes: string[]
-        }
+        build: BuildProps,
+        copyToTarget: CopyToTargetProps,
+        vdd: VddProps
     }
 }
+
