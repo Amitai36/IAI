@@ -1,37 +1,42 @@
+import { Button, Grid, TextField } from "@mui/material"
 import { useForm } from "react-hook-form"
 
+import { useStepper } from "../store/Stepper"
 import { File } from "../api/file/types"
-import { Button, Grid, TextField } from "@mui/material"
 
 function ConfiarationManagrt() {
+
+    const { setStepIncrease } = useStepper()
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm<File["file"]["configurationManager"]>()
-    const onSubmit = () => {
 
+    const onSubmit = () => {
+        setStepIncrease()
     }
+
     return (
-        <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container>
-                    <Grid item xs={12}>
-                        <TextField placeholder="url"  {...register("url")} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField placeholder="user_name" {...register("user_name", { required: true })} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField placeholder="password" {...register("password", { required: true })} />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button type="submit" >submit</Button>
-                    </Grid>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <Grid container>
+                <Grid item xs={12}>
+                    <TextField color={errors.url ? "error" : "info"}
+                        placeholder="url"  {...register("url")} />
                 </Grid>
-            </form>
-        </div>
+                <Grid item xs={12}>
+                    <TextField color={errors.user_name && "error"}
+                        placeholder="user_name" {...register("user_name", { required: true })} />
+                </Grid>
+                <Grid item xs={12}>
+                    <TextField color={errors.password && "error"}
+                        placeholder="password" {...register("password", { required: true })} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Button type="submit" >submit</Button>
+                </Grid>
+            </Grid>
+        </form>
     )
 }
 
