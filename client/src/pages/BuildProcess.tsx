@@ -1,28 +1,33 @@
 import { Button, Grid, TextField } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { File } from "../api/file/types"
+import { useStepper } from "../store/Stepper"
 
 function BuildProcess() {
+    const { setStepIncrease } = useStepper()
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
     } = useForm<File["file"]["build"]>()
-    const onSubmit = () => {
 
+    const onSubmit = () => {
+        setStepIncrease()
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container>
                 <Grid item xs={12}>
-                    <TextField placeholder="version"  {...register("versionNumber")} />
+                    <TextField color={errors.versionNumber ? "error" : "info"} placeholder="version"
+                        {...register("versionNumber", { required: true })} />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField placeholder="command" {...register("command", { required: true })} />
+                    <TextField color={errors.command ? "error" : "info"} placeholder="command"
+                        {...register("command", { required: true })} />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField placeholder="out put Directory" {...register("outputDirectory", { required: true })} />
+                    <TextField color={errors.outputDirectory ? "error" : "info"} placeholder="out put Directory"
+                        {...register("outputDirectory", { required: true })} />
                 </Grid>
                 <Grid item xs={12}>
                     <Button type="submit" >submit</Button>

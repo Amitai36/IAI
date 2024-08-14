@@ -9,7 +9,7 @@ function StepperJson() {
     return (
         <div>
             <DialogComponent content={
-                <StepperMui components={[<SelectBranches     />, <ConfiarationManagrt />, <BuildProcess />, <CopyToTarget />]} steps={["hi", "a", "b", "c"]} />
+                <StepperMui components={[<SelectBranches />, <ConfiarationManagrt />, <BuildProcess />, <CopyToTarget />]} steps={["hi", "a", "b", "c"]} />
             } open={true} title={{ text: "json configuretion file", color: "info" }}  >
             </DialogComponent>
         </div>
