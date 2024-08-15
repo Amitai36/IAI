@@ -1,12 +1,12 @@
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import DialogTitle from "@mui/material/DialogTitle";
-import { useTheme } from "@mui/material/styles";
-import { Close } from "@mui/icons-material";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
 import * as React from "react";
+import Dialog from "@mui/material/Dialog";
+import Button from "@mui/material/Button";
+import { Close } from "@mui/icons-material";
+import { useTheme } from "@mui/material/styles";
+import DialogTitle from "@mui/material/DialogTitle";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
 interface DialogComponentProps {
   open: boolean;

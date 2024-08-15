@@ -1,11 +1,11 @@
-import { Button, Grid, TextField, Typography } from "@mui/material"
-import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { Button, Grid, TextField, Typography } from "@mui/material"
 
-import { useFileCunfiguretion } from "../store/FileConfiguretion"
-import { buildSchama } from "../modules/formsSchema"
-import { useStepper } from "../store/Stepper"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useStepper } from "../store/Stepper"
+import { buildSchama } from "../modules/formsSchema"
+import { useFileCunfiguretion } from "../store/FileConfiguretion"
 
 type FormSchema = z.infer<typeof buildSchama>;
 

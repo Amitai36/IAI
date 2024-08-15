@@ -11,7 +11,7 @@ type FormSchema = z.infer<typeof copyToTargetSchama>;
 function CopyToTarget() {
 
     const { file: fileSettings, setFile } = useFileCunfiguretion()
-    const { setStepIncrease, setStepDecrease } = useStepper()
+    const { setStepIncrease } = useStepper()
     const {
         register,
         handleSubmit,
@@ -29,7 +29,7 @@ function CopyToTarget() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form style={{ textAlign: "center" }} onSubmit={handleSubmit(onSubmit)}>
             <TextField fullWidth
                 {...register("targetDirectory")}
                 label={"copy to target"} />

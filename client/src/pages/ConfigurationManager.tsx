@@ -1,12 +1,12 @@
-import { Button, Grid, TextField, Typography } from "@mui/material"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod"
+import { zodResolver } from '@hookform/resolvers/zod';
+import { SubmitHandler, useForm } from "react-hook-form"
+import { Button, Grid, TextField, Typography } from "@mui/material"
 
-import { configurationManagerSchema } from "../modules/formsSchema";
-import { useFileCunfiguretion } from "../store/FileConfiguretion"
-import PassWordButton from "../components/PasswordButton";
 import { useStepper } from "../store/Stepper"
+import PassWordButton from "../components/PasswordButton";
+import { useFileCunfiguretion } from "../store/FileConfiguretion"
+import { configurationManagerSchema } from "../modules/formsSchema";
 
 type FormSchema = z.infer<typeof configurationManagerSchema>;
 
