@@ -21,16 +21,16 @@ function ConfiarationManagrt() {
     } = useForm<FormSchema>({
         resolver: zodResolver(configurationManagerSchema), defaultValues:
         {
-            confirmPassword: fileSettings.file.configurationManager.password,
-            password: fileSettings.file.configurationManager.password,
-            url: fileSettings.file.configurationManager.url,
-            userName: fileSettings.file.configurationManager.user_name
+            confirmPassword: fileSettings.configurationManager.password,
+            password: fileSettings.configurationManager.password,
+            url: fileSettings.configurationManager.url,
+            userName: fileSettings.configurationManager.user_name
         }
     })
 
     const onSubmit: SubmitHandler<FormSchema> = (event) => {
         let currentFile = { ...fileSettings }
-        currentFile.file.configurationManager = {
+        currentFile.configurationManager = {
             password: event.password,
             url: event.url, user_name: event.userName
         }

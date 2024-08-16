@@ -22,10 +22,14 @@ export interface VddProps {
 
 export interface File {
     _id: string,
-    configurationManager: ConfigurationManagerProps,
-    branchSelection: {},
-    build: BuildProps,
-    copyToTarget: CopyToTargetProps,
-    vdd: VddProps
+    user_id: string,
+    version: string,
+    file: {
+        configurationManager: ConfigurationManagerProps,
+        branchSelection: {},
+        build: BuildProps,
+        copyToTarget: CopyToTargetProps,
+        vdd: VddProps
+    }
 }
 

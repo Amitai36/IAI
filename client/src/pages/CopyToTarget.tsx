@@ -17,13 +17,13 @@ function CopyToTarget() {
         handleSubmit,
     } = useForm<FormSchema>({
         defaultValues: {
-            targetDirectory: fileSettings.file.copyToTarget.targetDirectory
+            targetDirectory: fileSettings.copyToTarget.targetDirectory
         }
     })
 
     const onSubmit: SubmitHandler<FormSchema> = (event) => {
         let currentFile = { ...fileSettings }
-        currentFile.file.copyToTarget = { targetDirectory: event.targetDirectory }
+        currentFile.copyToTarget = { targetDirectory: event.targetDirectory }
         setFile(currentFile)
         setStepIncrease()
     }
