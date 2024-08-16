@@ -21,7 +21,6 @@ export interface VddProps {
 }
 
 export interface File {
-    _id: string,
     configurationManager: ConfigurationManagerProps,
     branchSelection: {},
     build: BuildProps,

@@ -1,20 +1,23 @@
 import { z } from "zod"
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from "react-hook-form"
-import { Button, Grid, TextField, Typography } from "@mui/material"
+import { Grid, TextField, Typography } from "@mui/material"
 
 import { useStepper } from "../store/Stepper"
+import NextButton from "../components/SubmitButton";
 import PassWordButton from "../components/PasswordButton";
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
 import { configurationManagerSchema } from "../modules/formsSchema";
-import NextButton from "../components/NextButton";
 
+
+//checking with zod to reacr-hook-form
 type FormSchema = z.infer<typeof configurationManagerSchema>;
 
 function ConfiarationManagrt() {
 
     const { setStepIncrease } = useStepper()
     const { setFile, file: fileSettings } = useFileCunfiguretion()
+
     const {
         register,
         handleSubmit,
@@ -34,8 +37,8 @@ function ConfiarationManagrt() {
         currentFile.configurationManager = {
             password: event.password,
             url: event.url, user_name: event.userName
-        }
-        setFile(currentFile)
+        }//changing only configurationManager
+        setFile(currentFile)//update state managment
         setStepIncrease()
     }
 

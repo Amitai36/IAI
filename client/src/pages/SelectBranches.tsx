@@ -2,10 +2,11 @@ import { Grid } from "@mui/material"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 import { useStepper } from "../store/Stepper"
+import NextButton from "../components/SubmitButton"
 import SelectComponent from "../components/SelectComponent"
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
-import NextButton from "../components/NextButton"
 
+//craete select branch using react-hook-form and generic select
 function SelectBranches() {
 
     const { file: fileSettings } = useFileCunfiguretion()

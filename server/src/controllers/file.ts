@@ -7,7 +7,7 @@ import { hashPassword } from "../utils/password";
 export const getFile = async (_req: Request, res: Response) => {
     try {
         const getFileJson = await FileModule.find()
-        res.json(getFileJson[0])
+        res.json(getFileJson[0]).status(200)
     } catch (error) {
         res.status(500).send({ error }).end();
     }
@@ -26,7 +26,7 @@ export const editFile = async (req: Request, res: Response) => {
                     vdd: { ...file.vdd, versionNumber: file.build.versionNumber },
                 }
             })
-        res.json(resault)
+        res.json(resault).status(202)
     } catch (error) {
         res.status(500).send({ error }).end();
     }

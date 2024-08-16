@@ -6,7 +6,7 @@ interface StepProps {
     setStepDecrease: () => void;
     resetStepper: () => void;
 }
-
+//create state menagment for get active step
 export const useStepper = create<StepProps>((set) => ({
     step: 0,
     setStepIncrease: () => {

@@ -4,6 +4,6 @@ import { editFile, getFile } from "../controllers/file";
 const router = Router();
 
 router.get("/", getFile);
-router.post("/", editFile);
+router.put("/", editFile);
 
 export default router;

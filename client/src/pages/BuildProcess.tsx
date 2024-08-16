@@ -1,15 +1,18 @@
 import { z } from "zod"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { Button, Grid, TextField, Typography } from "@mui/material"
-
 import { zodResolver } from "@hookform/resolvers/zod"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { Grid, TextField, Typography } from "@mui/material"
+
 import { useStepper } from "../store/Stepper"
+import NextButton from "../components/SubmitButton"
 import { buildSchama } from "../modules/formsSchema"
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
-import NextButton from "../components/NextButton"
 
+//checking with zod to reacr-hook-form
 type FormSchema = z.infer<typeof buildSchama>;
 
+
+//form to build process
 function BuildProcess() {
 
     const { setStepIncrease } = useStepper()
@@ -34,6 +37,7 @@ function BuildProcess() {
         setFile(currentFile)
         setStepIncrease()
     }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2} textAlign={"center"}>

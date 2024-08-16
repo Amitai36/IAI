@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
+//Here I create a general style for the project when I use the MUI for the children
 interface ProviderThemeProps {
   children: ReactNode;
 }

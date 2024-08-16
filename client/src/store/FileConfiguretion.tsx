@@ -6,9 +6,8 @@ interface FileCunfiguretionProps {
     file: File,
     setFile: (data: File) => void
 }
-
+//create state manegment for better control on file changes 
 export const useFileCunfiguretion = create<FileCunfiguretionProps>((set) => ({
-
     file: {
         configurationManager: {
             url: "",

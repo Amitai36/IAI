@@ -25,7 +25,7 @@ export default function DialogComponent(props: DialogComponentProps) {
     whenClose,
   } = props;
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));//for responsive
 
   const handleClose = () => {
     setOpen?.(false);
@@ -39,7 +39,7 @@ export default function DialogComponent(props: DialogComponentProps) {
           <Close />
         </Button>
       </DialogActions>
-      <DialogTitle color={color}>{text}</DialogTitle>
+      <DialogTitle textAlign={"center"} sx={{ textDecoration: "underline" }} color={color}>{text}</DialogTitle>
       <DialogContent>
         {content}
       </DialogContent>

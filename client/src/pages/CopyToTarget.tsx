@@ -1,14 +1,16 @@
 import { z } from "zod"
-import { Button, TextField } from "@mui/material"
+import { TextField } from "@mui/material"
 import { SubmitHandler, useForm } from "react-hook-form"
 
 import { useStepper } from "../store/Stepper"
+import NextButton from "../components/SubmitButton"
 import { copyToTargetSchama } from "../modules/formsSchema"
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
-import NextButton from "../components/NextButton"
 
+//checking ith zod to reacr-hook-form
 type FormSchema = z.infer<typeof copyToTargetSchama>;
 
+//create form to CopyToTarget for editing
 function CopyToTarget() {
 
     const { file: fileSettings, setFile } = useFileCunfiguretion()

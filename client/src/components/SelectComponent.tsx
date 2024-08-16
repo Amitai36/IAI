@@ -1,11 +1,13 @@
-import { FormControl, InputLabel, MenuItem, Select, SelectProps } from "@mui/material"
+import { FormControl, FormControlOwnProps, InputLabel, MenuItem, Select, SelectProps } from "@mui/material"
 
 
 interface SelectComponentProps {
     lable: string,
     option: string[],
-    formColor: "error" | "primary" | "secondary" | "info" | "success" | "warning"
+    formColor:FormControlOwnProps["color"]
 }
+
+//generic select component 
 
 const SelectComponent = (props: SelectComponentProps & SelectProps) => {
     const { lable, formColor, option, ...other } = props

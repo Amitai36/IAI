@@ -1,31 +1,33 @@
+import { toast } from "react-toastify";
 import { Add, Delete } from "@mui/icons-material"
 import { useForm, useFieldArray, Controller, SubmitHandler } from "react-hook-form"
 import { Button, Grid, IconButton, Stack, TextField, Typography } from "@mui/material"
-import { useUpdateFileConfiguration } from "../api/file/QueryFile";
-import { useFileCunfiguretion } from "../store/FileConfiguretion";
-import { toast } from "react-toastify";
-import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+
 import { useStepper } from "../store/Stepper";
+import SubmitButton from "../components/SubmitButton";
+import { useFileCunfiguretion } from "../store/FileConfiguretion";
+import { useUpdateFileConfiguration } from "../api/file/QueryFile";
 
 
 interface FixesProps {
     fixes: { fix: string }[],
 }
-
+//create form to add recent fixes and after close the dialog
 function RecentFixes({ setOpen }: {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>,
 }) {
 
-    const { mutate } = useUpdateFileConfiguration()
-
     const { file: fileSttings, setFile } = useFileCunfiguretion()
+    const { mutate } = useUpdateFileConfiguration()
     const { resetStepper } = useStepper()
     const { control, handleSubmit, formState: { errors } }
         = useForm<FixesProps>({
             defaultValues: {
-                fixes: [{ fix: "" }]
+                fixes: fileSttings.vdd.recentFixes.map((fix) => { return { fix } })
             }
         });
+
+    //beacse i have multi field that can to be here
     const { fields, append, remove } = useFieldArray<{ fixes: { fix: string }[] }>({
         control,
         name: "fixes"
@@ -38,7 +40,6 @@ function RecentFixes({ setOpen }: {
         mutate({ file: currentFile }, {
             onSuccess: (data) => {
                 setFile(data)
-                // refetch()
                 setOpen(prev => !prev)
                 resetStepper()
                 toast.success("File update")
@@ -87,11 +88,7 @@ function RecentFixes({ setOpen }: {
                     ))}
                 </Grid>
                 <div style={{ width: "10%" }}>
-                    <Button type="submit"
-                        color='success'
-                        variant='contained'
-                    >save/edit
-                    </Button>
+                    <SubmitButton text="update" />
                 </div>
             </Stack>
         </form >

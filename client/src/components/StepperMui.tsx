@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import Step from '@mui/material/Step';
 import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
-import { Add, ArrowBack, ArrowForward } from '@mui/icons-material';
-import { Button, Grid, IconButton, Stack } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { Grid, IconButton, Stack } from '@mui/material';
 
 import { useStepper } from '../store/Stepper';
 
@@ -15,7 +15,7 @@ interface StepperProps {
 
 function StepperMui(props: StepperProps) {
     const { steps, components } = props
-    const { setStepDecrease, step, setStepIncrease } = useStepper()
+    const { setStepDecrease, step } = useStepper()
 
     return (
         <Box sx={{ width: '100%' }}>
@@ -33,14 +33,11 @@ function StepperMui(props: StepperProps) {
                     </Grid>
 
                     <Grid sx={{ bottom: 30, position: "absolute" }} item xs={10.5}>
-                        {step > 0 && <IconButton>
-                            <ArrowBack onClick={() => setStepDecrease()} />
-                        </IconButton>}
+                        {step > 0 &&
+                            <IconButton>
+                                <ArrowBack onClick={() => setStepDecrease()} />
+                            </IconButton>}
                     </Grid>
-                    {/* <Grid sx={{ bottom: 30, position: "absolute", right: 30 }} item xs={1.5}>
-                        <IconButton type='submit' onClick={() => setStepIncrease()}><ArrowForward /></IconButton>
-                    </Grid> */}
-
                 </Grid>
             </Stack>
         </Box>
