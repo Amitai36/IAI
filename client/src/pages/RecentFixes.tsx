@@ -1,11 +1,16 @@
 import { Add, Delete } from "@mui/icons-material"
 import { useForm, useFieldArray, Controller, SubmitHandler } from "react-hook-form"
 import { Button, Grid, IconButton, Stack, TextField, Typography } from "@mui/material"
+import { useUpdateFileConfiguration } from "../api/file/QueryFile";
+import { useFileCunfiguretion } from "../store/FileConfiguretion";
 
 
 interface FixesProps { fixes: { fix: string }[] }
 
 function RecentFixes() {
+
+    const { mutate} = useUpdateFileConfiguration()
+    const { file: fileSttings } = useFileCunfiguretion()
 
     const { control, handleSubmit, formState: { errors } }
         = useForm<FixesProps>({
@@ -19,8 +24,18 @@ function RecentFixes() {
     });
 
     const onSubmit: SubmitHandler<FixesProps> = (event) => {
-        console.log(event)
+        const currentFile = fileSttings
+        currentFile.vdd.recentFixes = event.fixes.map((item) => item.fix)
+        currentFile.vdd.releaseDate = new Date()
+        mutate({ file: currentFile }, {
+            onSuccess: (data) => {
+                console.log(data)
+            }
+        }
+        )
     }
+
+
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -21,15 +21,15 @@ function BuildProcess() {
     } = useForm<FormSchema>({
         resolver: zodResolver(buildSchama), defaultValues:
         {
-            command: fileSettings.file.build.command,
-            outputDirectory: fileSettings.file.build.outputDirectory,
-            versionNumber: fileSettings.file.build.versionNumber
+            command: fileSettings.build.command,
+            outputDirectory: fileSettings.build.outputDirectory,
+            versionNumber: fileSettings.build.versionNumber
         }
     })
 
     const onSubmit: SubmitHandler<FormSchema> = (event) => {
         let currentFile = { ...fileSettings }
-        currentFile.file.build = event
+        currentFile.build = event
         setFile(currentFile)
         setStepIncrease()
     }

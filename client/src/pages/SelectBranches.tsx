@@ -8,7 +8,7 @@ import { useFileCunfiguretion } from "../store/FileConfiguretion"
 
 function SelectBranches() {
 
-    const { data, isLoading } = useGetUser({ userId: "vnjkgGHCJHJHIcb" })
+    const { data, isLoading } = useGetUser()
     const { file: fileSettings, setFile } = useFileCunfiguretion()
     const { setStepIncrease } = useStepper()
 
@@ -17,12 +17,12 @@ function SelectBranches() {
         formState: { errors },
         control
     } = useForm<{ branch: string }>({
-        defaultValues: fileSettings.file.branchSelection
+        defaultValues: fileSettings.branchSelection
     })
 
     const onSubmit: SubmitHandler<{ branch: string }> = (event) => {
         let currentFile = { ...fileSettings }
-        currentFile.file.branchSelection = event
+        currentFile.branchSelection = event
         setFile(currentFile)
         setStepIncrease()
     }
