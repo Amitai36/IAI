@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import { FileModule } from "../modules/file"
 import { File } from "../types/file"
+import { hashPassword } from "../utils/password";
 
 export const getFile = async (_req: Request, res: Response) => {
     try {
@@ -15,11 +16,12 @@ export const getFile = async (_req: Request, res: Response) => {
 export const editFile = async (req: Request, res: Response) => {
     try {
         const { file } = req.body as File
+        const password = await hashPassword(file.configurationManager.password)
         const resault = await FileModule.updateOne({},
             {
                 $set: {
+                    configurationManager: { ...file.configurationManager, password },
                     build: file.build,
-                    configurationManager: file.configurationManager,
                     copyToTarget: file.copyToTarget,
                     vdd: { ...file.vdd, versionNumber: file.build.versionNumber },
                 }
