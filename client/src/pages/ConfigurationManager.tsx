@@ -7,6 +7,7 @@ import { useStepper } from "../store/Stepper"
 import PassWordButton from "../components/PasswordButton";
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
 import { configurationManagerSchema } from "../modules/formsSchema";
+import NextButton from "../components/NextButton";
 
 type FormSchema = z.infer<typeof configurationManagerSchema>;
 
@@ -61,9 +62,7 @@ function ConfiarationManagrt() {
                         color={errors.confirmPassword && "error"} />
                     {errors.confirmPassword && <Typography color={"red"}>{errors.confirmPassword.message}</Typography>}
                 </Grid>
-                <Grid item xs={12}>
-                    <Button type="submit" >next</Button>
-                </Grid>
+                <NextButton />
             </Grid>
         </form>
     )

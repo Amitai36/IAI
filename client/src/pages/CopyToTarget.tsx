@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useStepper } from "../store/Stepper"
 import { copyToTargetSchama } from "../modules/formsSchema"
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
+import NextButton from "../components/NextButton"
 
 type FormSchema = z.infer<typeof copyToTargetSchama>;
 
@@ -33,7 +34,7 @@ function CopyToTarget() {
             <TextField fullWidth
                 {...register("targetDirectory")}
                 label={"copy to target"} />
-            <Button type="submit" >next</Button>
+            <NextButton />
         </form>
     )
 }

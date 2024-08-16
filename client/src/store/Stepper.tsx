@@ -4,6 +4,7 @@ interface StepProps {
     step: number;
     setStepIncrease: () => void;
     setStepDecrease: () => void;
+    resetStepper: () => void;
 }
 
 export const useStepper = create<StepProps>((set) => ({
@@ -16,6 +17,11 @@ export const useStepper = create<StepProps>((set) => ({
     setStepDecrease: () => {
         set((state) => ({
             step: state.step - 1,
+        }));
+    },
+    resetStepper: () => {
+        set(() => ({
+            step: 0
         }));
     },
 }));

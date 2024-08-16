@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import Step from '@mui/material/Step';
 import Stepper from '@mui/material/Stepper';
 import StepLabel from '@mui/material/StepLabel';
-import { ArrowBack } from '@mui/icons-material';
-import { Button, Grid, Stack } from '@mui/material';
+import { Add, ArrowBack, ArrowForward } from '@mui/icons-material';
+import { Button, Grid, IconButton, Stack } from '@mui/material';
 
 import { useStepper } from '../store/Stepper';
 
@@ -15,12 +15,11 @@ interface StepperProps {
 
 function StepperMui(props: StepperProps) {
     const { steps, components } = props
-    const { setStepDecrease, step } = useStepper()
+    const { setStepDecrease, step, setStepIncrease } = useStepper()
 
     return (
         <Box sx={{ width: '100%' }}>
-            <Stack spacing={2}>
-                {step > 0 && <Button sx={{ width: "10%" }} variant='contained' color='warning' onClick={() => setStepDecrease()}><ArrowBack /></Button>}
+            <Stack height={"100%"} spacing={2}>
                 <Stepper activeStep={step} alternativeLabel>
                     {steps.map((label) => (
                         <Step key={label}>
@@ -28,10 +27,20 @@ function StepperMui(props: StepperProps) {
                         </Step>
                     ))}
                 </Stepper>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
+                <Grid height={"100%"} container spacing={2}>
+                    <Grid item xs={12} height={"90%"}>
                         {components[step]}
                     </Grid>
+
+                    <Grid sx={{ bottom: 30, position: "absolute" }} item xs={10.5}>
+                        {step > 0 && <IconButton>
+                            <ArrowBack onClick={() => setStepDecrease()} />
+                        </IconButton>}
+                    </Grid>
+                    {/* <Grid sx={{ bottom: 30, position: "absolute", right: 30 }} item xs={1.5}>
+                        <IconButton type='submit' onClick={() => setStepIncrease()}><ArrowForward /></IconButton>
+                    </Grid> */}
+
                 </Grid>
             </Stack>
         </Box>

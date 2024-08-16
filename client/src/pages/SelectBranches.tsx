@@ -1,15 +1,14 @@
-import { Button } from "@mui/material"
+import { Grid } from "@mui/material"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 import { useStepper } from "../store/Stepper"
-import { useGetUser } from "../api/file/QueryFile"
 import SelectComponent from "../components/SelectComponent"
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
+import NextButton from "../components/NextButton"
 
 function SelectBranches() {
 
-    const { data, isLoading } = useGetUser()
-    const { file: fileSettings, setFile } = useFileCunfiguretion()
+    const { file: fileSettings } = useFileCunfiguretion()
     const { setStepIncrease } = useStepper()
 
     const {
@@ -20,33 +19,31 @@ function SelectBranches() {
         defaultValues: fileSettings.branchSelection
     })
 
-    const onSubmit: SubmitHandler<{ branch: string }> = (event) => {
-        let currentFile = { ...fileSettings }
-        currentFile.branchSelection = event
-        setFile(currentFile)
+    const onSubmit: SubmitHandler<{ branch: string }> = () => {
         setStepIncrease()
     }
 
-    if (isLoading || !data)
-        return <h1>loading...</h1>
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Controller
-                name="branch"
-                control={control}
-                render={({ field }) => (
-                    <SelectComponent
-                        {...field}
-                        defaultValue={Object.values(data)[0]}
-                        autoFocus={!!errors.branch}
-                        formColor={"info"}
-                        lable="Select Branch"
-                        option={Object.values(data)}
+        <form style={{ position: "relative", paddingBottom: '60px' }} onSubmit={handleSubmit(onSubmit)}>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
+                    <Controller
+                        name="branch"
+                        control={control}
+                        render={({ field }) => (
+                            <SelectComponent
+                                {...field}
+                                defaultValue={Object.values(fileSettings.branchSelection)[0]}
+                                autoFocus={!!errors.branch}
+                                formColor={"info"}
+                                lable="Select Branch"
+                                option={Object.values(fileSettings.branchSelection)}
+                            />
+                        )}
                     />
-                )}
-            />
-            <Button type="submit">Next</Button>
+                </Grid>
+                <NextButton />
+            </Grid>
         </form >
     )
 }
