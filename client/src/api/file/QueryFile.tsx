@@ -1,10 +1,17 @@
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
-import { getBranchSelection, updateFileConfiguration } from "./fetching";
+import { getJsonFile, updateFileConfiguration } from "./fetching";
 
-export const useGetUser = () => {
-  return useQuery(["user", "file"], () => getBranchSelection())
+
+export const useGetJsonFile = () => {
+  return useQuery(["file"], getJsonFile)
 };
+
 export const useUpdateFileConfiguration = () => {
-  return useMutation(["user", "file"], updateFileConfiguration)
+  const queryClient = useQueryClient();
+  return useMutation(["file"], updateFileConfiguration, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["file"]);
+    }
+  })
 };

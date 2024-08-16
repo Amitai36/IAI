@@ -3,15 +3,23 @@ import { useForm, useFieldArray, Controller, SubmitHandler } from "react-hook-fo
 import { Button, Grid, IconButton, Stack, TextField, Typography } from "@mui/material"
 import { useUpdateFileConfiguration } from "../api/file/QueryFile";
 import { useFileCunfiguretion } from "../store/FileConfiguretion";
+import { toast } from "react-toastify";
+import { QueryObserverResult, RefetchOptions, RefetchQueryFilters } from "react-query";
+import { useStepper } from "../store/Stepper";
 
 
-interface FixesProps { fixes: { fix: string }[] }
+interface FixesProps {
+    fixes: { fix: string }[],
+}
 
-function RecentFixes() {
+function RecentFixes({ setOpen }: {
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}) {
 
-    const { mutate} = useUpdateFileConfiguration()
-    const { file: fileSttings } = useFileCunfiguretion()
+    const { mutate } = useUpdateFileConfiguration()
 
+    const { file: fileSttings, setFile } = useFileCunfiguretion()
+    const { resetStepper } = useStepper()
     const { control, handleSubmit, formState: { errors } }
         = useForm<FixesProps>({
             defaultValues: {
@@ -29,7 +37,11 @@ function RecentFixes() {
         currentFile.vdd.releaseDate = new Date()
         mutate({ file: currentFile }, {
             onSuccess: (data) => {
-                console.log(data)
+                setFile(data)
+                // refetch()
+                setOpen(prev => !prev)
+                resetStepper()
+                toast.success("File update")
             }
         }
         )

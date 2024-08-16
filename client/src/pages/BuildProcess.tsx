@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useStepper } from "../store/Stepper"
 import { buildSchama } from "../modules/formsSchema"
 import { useFileCunfiguretion } from "../store/FileConfiguretion"
+import NextButton from "../components/NextButton"
 
 type FormSchema = z.infer<typeof buildSchama>;
 
@@ -51,9 +52,7 @@ function BuildProcess() {
                         {...register("outputDirectory", { required: true })} />
                     {errors.outputDirectory && <Typography color={"red"}>{errors.outputDirectory.message}</Typography>}
                 </Grid>
-                <Grid item xs={12}>
-                    <Button type="submit" >next</Button>
-                </Grid>
+                <NextButton />
             </Grid>
         </form>
     )

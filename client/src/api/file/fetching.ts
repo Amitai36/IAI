@@ -1,12 +1,12 @@
 import axios from "axios";
+
 import { File } from "./types";
 
-export const getBranchSelection = async () => {
-    const branches = await axios.get<File["branchSelection"]>(
-        `http://localhost:3000/file/getBranch`,
+export const getJsonFile = async () => {
+    const file = await axios.get<File>(
+        `http://localhost:3000/file`,
     );
-    console.log(branches.data)
-    return branches.data;
+    return file.data;
 };
 
 export const updateFileConfiguration = async ({
@@ -14,7 +14,7 @@ export const updateFileConfiguration = async ({
 }: {
     file: File
 }) => {
-    const newFile = await axios.post<File["branchSelection"]>(
+    const newFile = await axios.post<File>(
         `http://localhost:3000/file`, {
         file
     }

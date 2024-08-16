@@ -14,7 +14,7 @@ function ProviderTheme(props: ProviderThemeProps) {
         palette: {
           mode: "dark",
           background: {
-            default: "#e2f2f2",
+            default: "gray",
           },
 
         },
