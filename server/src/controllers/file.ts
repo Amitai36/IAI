@@ -4,6 +4,8 @@ import { File } from "../types/file"
 import { FileModule } from "../modules/file"
 import { hashPassword } from "../utils/password";
 
+
+//get the file
 export const getFile = async (_req: Request, res: Response) => {
     try {
         const getFileJson = await FileModule.find()
@@ -13,20 +15,23 @@ export const getFile = async (_req: Request, res: Response) => {
     }
 }
 
+//edit the file
 export const editFile = async (req: Request, res: Response) => {
     try {
         const { file } = req.body as File
-        const password = await hashPassword(file.configurationManager.password)
-        const resault = await FileModule.findOneAndUpdate({},
+        // set the file only spechific object
+        let resault = await FileModule.findOneAndUpdate({},
             {
                 $set: {
-                    configurationManager: { ...file.configurationManager, password },
+                    configurationManager: file.configurationManager,
                     build: file.build,
                     copyToTarget: file.copyToTarget,
                     vdd: { ...file.vdd, versionNumber: file.build.versionNumber },
                 }
-            })
-        res.json(resault).status(202)
+            }, { new: true })
+        const resObj = Object(resault)
+        delete resObj?._id
+        res.json(resObj).status(202)
     } catch (error) {
         res.status(500).send({ error }).end();
     }

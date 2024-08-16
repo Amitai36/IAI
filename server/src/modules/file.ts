@@ -1,5 +1,7 @@
 import { model, Schema } from "mongoose"
 
+
+//schema for file in mongodb
 const fileSchema = new Schema({
     configurationManager: {
         url: String,

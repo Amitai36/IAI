@@ -1,7 +1,10 @@
-import { mongoDBConnection } from "../config";
 import mongoose from "mongoose";
+
+import { mongoDBConnection } from "../config";
+
 const uri = mongoDBConnection;
 
+//connect by uri to mongodb
 export function connectDB() {
   mongoose
     .connect(uri, {
