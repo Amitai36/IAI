@@ -28,11 +28,8 @@ export const editFile = async (req: Request, res: Response) => {
                     copyToTarget: file.copyToTarget,
                     vdd: { ...file.vdd, versionNumber: file.build.versionNumber },
                 }
-            }, { new: true, })
-        const resObj = Object(resault)
-        console.log(resObj)
-        delete resObj?._id
-        res.json(resObj).status(202)
+            }, { new: true })
+        res.json(resault).status(202)
     } catch (error) {
         res.status(500).send({ error }).end();
     }

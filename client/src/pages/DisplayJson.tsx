@@ -18,14 +18,14 @@ function DisplayJson() {
     }, [data])
 
     if (isLoading)
-        return <Typography>Loading...</Typography>//when i don't have data or my req still loading
+        return <Typography component={"span"}>Loading...</Typography>//when i don't have data or my req still loading
     if (!data)
-        return <Typography>no data </Typography>
+        return <Typography component={"span"}>no data </Typography>
 
     return (
         <div>
             <Paper sx={{ height: "100%" }}>
-                <Typography >
+                <Typography component={"span"} >
                     <JsonView data={data} shouldExpandNode={allExpanded} style={darkStyles} />
                 </Typography>
             </Paper>
