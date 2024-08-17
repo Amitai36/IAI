@@ -15,10 +15,12 @@ function DisplayJson() {
     useEffect(() => {
         if (data)
             setFile(data)//when i have the data i want update state file 
-    }, [isLoading])
+    }, [data])
 
-    if (isLoading || !data)
+    if (isLoading)
         return <Typography>Loading...</Typography>//when i don't have data or my req still loading
+    if (!data)
+        return <Typography>no data </Typography>
 
     return (
         <div>

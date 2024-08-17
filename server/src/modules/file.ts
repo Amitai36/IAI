@@ -22,7 +22,7 @@ const fileSchema = new Schema({
         releaseDate: Date,
         recentFixes: [String]
     }
-})
+}, {})
 
 
 export const FileModule = model("Configuration_files", fileSchema)

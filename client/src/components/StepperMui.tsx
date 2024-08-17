@@ -18,7 +18,7 @@ function StepperMui(props: StepperProps) {
     const { setStepDecrease, step } = useStepper()
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', height: "100%" }}>
             <Stack height={"100%"} spacing={2}>
                 <Stepper activeStep={step} alternativeLabel>
                     {steps.map((label) => (
@@ -27,14 +27,16 @@ function StepperMui(props: StepperProps) {
                         </Step>
                     ))}
                 </Stepper>
-                <Grid height={"100%"} container spacing={2}>
-                    <Grid item xs={12} height={"90%"}>
-                        {components[step]}
+                <Grid height={"90%"} container spacing={2}>
+                    <Grid item xs={12} height={"100%"}>
+                        <div style={{ width: "95%", display: "flex", alignItems: "center" }}>
+                            {components[step]}
+                        </div>
                     </Grid>
 
-                    <Grid sx={{ bottom: 30, position: "absolute" }} item xs={10.5}>
+                    <Grid sx={{ left: 25, bottom: 30, position: "absolute" }} item xs={10.5}>
                         {step > 0 &&
-                            <IconButton>
+                            <IconButton sx={{ zIndex: 2 }}>
                                 <ArrowBack onClick={() => setStepDecrease()} />
                             </IconButton>}
                     </Grid>

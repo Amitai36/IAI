@@ -25,9 +25,9 @@ function SelectBranches() {
     }
 
     return (
-        <form style={{ position: "relative", paddingBottom: '60px' }} onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
+        <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
+            <Grid container spacing={2} width={"100%"} height={"100%"}>
+                <Grid item xs={12} height={"100%"}>
                     <Controller
                         name="branch"
                         control={control}

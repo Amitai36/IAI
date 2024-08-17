@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material"
 
 interface SubmitButtonProps {
-    text: string
+    text?: string
 }
 
 function SubmitButton(props: SubmitButtonProps) {

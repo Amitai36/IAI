@@ -51,17 +51,17 @@ function RecentFixes({ setOpen }: {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={2}>
-                <div style={{ width: "10%" }}>
+        <form style={{ width: "100%", height: "100%", overflow: "hidden" }} onSubmit={handleSubmit(onSubmit)}>
+            <Stack height={"90%"} spacing={2} mb={10}>
+                <div style={{ width: "10%", }}>
                     <IconButton
                         onClick={() => append({ fix: "" })}>
                         <Add />
                     </IconButton>
                 </div>
-                <Grid container columnSpacing={1} rowSpacing={2}>
+                <Grid sx={{ width: "100%", height: "10%", overflow: "auto" }} container columnSpacing={1} rowSpacing={2}>
                     {fields.map((item, index) => (
-                        <Grid item xs={6} key={item.id}>
+                        <Grid item xs={6} key={item.id} width={"100%"} >
                             <Controller
                                 rules={{ required: "This field can't be empty", }}
                                 name={`fixes.${index}.fix`}
@@ -69,6 +69,7 @@ function RecentFixes({ setOpen }: {
                                 render={({ field }) => (
                                     <>
                                         <TextField
+                                            fullWidth
                                             {...field}
                                             label="Fix"
                                             error={!!errors.fixes?.[index]}
@@ -87,10 +88,12 @@ function RecentFixes({ setOpen }: {
                         </Grid>
                     ))}
                 </Grid>
-                <div style={{ width: "10%" }}>
-                    <SubmitButton text="update" />
-                </div>
             </Stack>
+            <div style={{ height: "15%", boxSizing: "content-box", width: "90%", zIndex: 1, backgroundColor: "#383838", position: "absolute", bottom: 0 }}>
+            </div>
+            <div style={{ zIndex: 2, position: "absolute", bottom: 0, right: 100 }}>
+                <SubmitButton text="update" />
+            </div>
         </form >
     )
 }
